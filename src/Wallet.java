@@ -17,7 +17,7 @@ public class Wallet {
 		if(loadDBDriver())
 		{
 			try {
-		        con = DriverManager.getConnection(url, "estymator", "jnesbo"); //TODO not hardcode passwd
+		        con = DriverManager.getConnection(url, login, passwd); //TODO not hardcode passwd
 		    } catch (SQLException e) {
 		        System.out.println("Blad przy ladowaniu sterownika!");
 		        System.exit(1);
