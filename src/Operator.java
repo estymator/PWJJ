@@ -15,20 +15,22 @@ public class Operator {
 	ExecutorService exec;
 	ArrayList<Future<Double>> results;
 	ArrayList<ConversionRate> convThreads;
-	Wallet wallet = new Wallet();
+	Wallet wallet;
 	
 	
+	MainFrame mainFrame;
 	String baseCurrency, destCurrency;
 	Double amount;
 	CurrencyRates cr;
 	ConversionRate conRate;
 	JTextArea resultDest;
 	JTextArea PLN_Rate[]= new JTextArea[10];
-	JTextArea lowerRates[]= new JTextArea[10];  // dolne wartości określonej ilości dla każdej waluty
+	JTextArea lowerRates[]= new JTextArea[10];  // dolne pola wartości określonej ilości dla każdej waluty
 	String keys[]= {"PLN","EUR","GBP","USD","AUD","HUF","RUB","INR","CHF","BTC"};
 	
 	Operator()
 	{
+		//wallet = new Wallet();
 		baseCurrency="USD";
 		destCurrency="PLN";
 		amount =1D;
@@ -124,17 +126,10 @@ public class Operator {
 		this.lowerRates=lowerRates;
 		this.keys=keys;
 		setPLNRate();
-		setDefaultLowerAmountArea();
+		setLowerAmountArea();
 	}
 	
 	
-	void setDefaultLowerAmountArea()
-	{
-		for(int i=0;i<10;i++)
-		{
-			lowerRates[i].setText("("+String.valueOf(normalizeDouble(cr.getRate(keys[i])))+")");
-		}
-	}
 	
 	void setLowerAmountArea()
 	{
@@ -166,6 +161,19 @@ public class Operator {
 			counter++;
 		}
 		
+		
+	}
+	
+	
+	void refresh()
+	{
+		cr.refresh();
+		setPLNRate();
+		setLowerAmountArea();
+	}
+	
+	void setWallet()
+	{
 		
 	}
 	

@@ -29,7 +29,7 @@ public class FlagPanel extends JPanel implements ActionListener{
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc= new GridBagConstraints();
 		setBackground(Color.GRAY);
-		setPreferredSize(new Dimension(800, 75));
+		setPreferredSize(new Dimension(1200, 75));
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -39,7 +39,7 @@ public class FlagPanel extends JPanel implements ActionListener{
 	
 	
 	/**
-	 * Dodaje do ramki widok flag jako przycisków
+	 * Dodaje do ramki widok flag jako przyciskï¿½w
 	 * @param panel ramka
 	 * @param gbc Layout manager
 	 */
@@ -67,8 +67,8 @@ public class FlagPanel extends JPanel implements ActionListener{
 	}
 	
 	/**
-	 * Zwraca przycisk z okreœlon¹ flag¹
-	 * @param code kod pañstwa
+	 * Zwraca przycisk z okreï¿½lonï¿½ flagï¿½
+	 * @param code kod paï¿½stwa
 	 * @return
 	 */
 	JButton getButtonWithFlag(String code)

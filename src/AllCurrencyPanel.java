@@ -30,7 +30,7 @@ public class AllCurrencyPanel extends JPanel{
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc= new GridBagConstraints();
 		setBackground(Color.DARK_GRAY);
-		setPreferredSize(new Dimension(800, 125));
+		setPreferredSize(new Dimension(1200, 125));
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		

@@ -24,7 +24,7 @@ public class AmountPanel extends JPanel{
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc= new GridBagConstraints();
 		setBackground(Color.DARK_GRAY);
-		setPreferredSize(new Dimension(800, 125));
+		setPreferredSize(new Dimension(1200, 125));
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -40,7 +40,7 @@ public class AmountPanel extends JPanel{
 		amount = new JTextField("1");
 		
 		/**
-		 * zmiana wartoœci przeliczanej po ka¿dej zmianie wartoœci textBox
+		 * zmiana wartoï¿½ci przeliczanej po kaï¿½dej zmianie wartoï¿½ci textBox
 		 */
 		amount.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
@@ -95,7 +95,7 @@ public class AmountPanel extends JPanel{
 		g2.setFont(font);
 		g2.setColor(Color.WHITE);
 
-		g2.drawString("Zamieñ <ilosc> <waluta> \n\r tak", 10, 30);
+		g2.drawString("ZamieÅ„ <ilosc> <waluta> \n\r", 10, 30);
 	}
 
 

@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 /**
- * Klasa generuj¹ca okno g³ówne	
+ * Klasa generujï¿½ca okno gï¿½ï¿½wne	
  * @author Pawel
  *
  */
@@ -11,9 +11,10 @@ public class MainFrame extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 2269971701250845501L;
-	public static final int MAIN_WIDTH=800;
-	static final float MAIN_HEIGHT=600;
+	//public static final int MAIN_WIDTH=1200;
+	//static float MAIN_HEIGHT=600;
 	Operator operator;
+	GridBagConstraints mainGbc;
 	
 	public MainFrame(Operator o)
 	{
@@ -22,17 +23,18 @@ public class MainFrame extends JFrame{
 		setBackground(Color.GRAY);
 		
 		operator=o;
+		operator.mainFrame=this;
 		
 		
 		setLocation(0,0);
 		setLayout(new GridBagLayout());
-		GridBagConstraints mainGbc = new GridBagConstraints();
+		mainGbc = new GridBagConstraints();
 		mainGbc.gridx=0;
 		mainGbc.gridy=0;
 		mainGbc.fill=GridBagConstraints.HORIZONTAL;
 		
 		
-		JPanel upperPanel = new UpperPanel();
+		JPanel upperPanel = new UpperPanel(operator);
 		add(upperPanel,mainGbc);
 		mainGbc.gridy++;
 		
@@ -52,7 +54,10 @@ public class MainFrame extends JFrame{
 		add(allJPanel,mainGbc);
 		pack();
 		setVisible(true);
+		mainGbc.gridy++;
+		
 	}
+	
 	
 	
 }

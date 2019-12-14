@@ -27,7 +27,7 @@ public class CurrencyRates {
 		try {
 			content=sendReq();
 		} catch(UnknownHostException e) {
-			System.out.println("Sprawdz po��czenie z internetem");
+			System.out.println("Sprawdz połączenie z internetem");
 		}catch (IOException e1) {
 		
 			e1.printStackTrace();
@@ -40,8 +40,8 @@ public class CurrencyRates {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Dodanie kursy pln wzgl�dem innych walut
-		System.out.println("koniec http");
+		//Dodanie kursów pln 
+		
 		currency_rates.put("PLN",1D);
 		currency_rates.put("BTC",10000D);
 
@@ -93,5 +93,35 @@ public class CurrencyRates {
 	Double getRate(String key)
 	{
 		return currency_rates.get(key);
+	}
+	
+	void refresh()
+	{
+		currency_rates.clear();
+		
+StringBuffer content = new StringBuffer();
+		
+		try {
+			content=sendReq();
+		} catch(UnknownHostException e) {
+			System.out.println("Sprawdz połączenie z internetem");
+		}catch (IOException e1) {
+		
+			e1.printStackTrace();
+		}
+		
+		
+		try {
+			parseResponse(content.toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Dodanie kursów pln 
+		
+		currency_rates.put("PLN",1D);
+		currency_rates.put("BTC",10000D);
+
+		
 	}
 }
