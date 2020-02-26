@@ -95,7 +95,7 @@ public class AmountPanel extends JPanel{
 		g2.setFont(font);
 		g2.setColor(Color.WHITE);
 
-		g2.drawString("Zamień <ilosc> <waluta> \n\r", 10, 30);
+		g2.drawString("Wybierz walutę oraz jej ilość \n\r", 10, 30);
 	}
 
 

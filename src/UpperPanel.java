@@ -2,6 +2,9 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -12,6 +15,7 @@ public class UpperPanel extends JPanel implements ActionListener {
 	 */
 	JButton refresh;
 	JButton loadWallet;
+	JButton listButton; // pokazuje wszystkich zapisanych maklerów
 	JTextArea title;
 	Operator operator;
 	GridBagConstraints gbc;
@@ -32,7 +36,7 @@ public class UpperPanel extends JPanel implements ActionListener {
 		gbc.weighty=0.5;
 		gbc.gridx=0;
 		gbc.gridy=0;
-		gbc.anchor=GridBagConstraints.FIRST_LINE_START;
+		gbc.anchor=GridBagConstraints.CENTER;
 		
 		showTitle();
 		
@@ -40,27 +44,17 @@ public class UpperPanel extends JPanel implements ActionListener {
 		gbc.insets = new Insets(0, 10, 60, 0);
 	
 	
-		
-		refresh = new JButton(new ImageIcon("includy/buttons/refresh.png"));
-		refresh.setBackground(Color.GRAY);
-		refresh.setName("refresh");
-		refresh.setBorderPainted(false);
-		refresh.addActionListener(this);
-		refresh.setPreferredSize(new Dimension(30,30));
-		add(refresh, gbc);
+		addRefreshButton();
 		
 		gbc.anchor=GridBagConstraints.LINE_END;
 		
-		loadWallet = new JButton(new ImageIcon("includy/buttons/wallet.png"));
-		loadWallet.setName("loadWallet");
-		loadWallet.setBorderPainted(false);
-		loadWallet.addActionListener(this);
-		loadWallet.setPreferredSize(new Dimension(30,30));
-		add(loadWallet, gbc);
+		addMaklerButton();
+		gbc.insets = new Insets(0, 0, 60, 0);
+		gbc.anchor=GridBagConstraints.FIRST_LINE_START;
+		addListButton();
 		
 		
-		
-		showWallet();
+		//showWallet();
 		
 		
 	}
@@ -71,9 +65,12 @@ public class UpperPanel extends JPanel implements ActionListener {
 		if(source.getName()=="refresh")
 		{
 			operator.refresh();
-		}else if(source.getName()=="loadWallet")
+		}else if(source.getName()=="Makler")
 		{
-			showWallet();
+			operator.setMakler();
+		}else if(source.getName()=="list")
+		{
+			operator.listMaklers();
 		}
 	
 		
@@ -93,20 +90,39 @@ public class UpperPanel extends JPanel implements ActionListener {
 		add(title,gbc);
 	}
 	
-	
-	void showWallet()
+	void addMaklerButton()
 	{
-		gbc.anchor=GridBagConstraints.PAGE_END;
+		loadWallet = new JButton(new ImageIcon("includy/buttons/wallet.png"));
+		loadWallet.setName("Makler");
+		loadWallet.setBorderPainted(false);
+		loadWallet.addActionListener(this);
+		loadWallet.setPreferredSize(new Dimension(30,30));
+		add(loadWallet, gbc);
 		
-		JTextArea w= new JTextArea("wallet");
-		w.setEditable(false);
-		w.setFont(new Font(Font.SANS_SERIF,Font.PLAIN, 10));
-		w.setBackground(Color.WHITE);
-		w.setForeground(Color.WHITE);
-		add(w,gbc);
-		
-		System.out.println("witam");
-		
+	}
+	
+	void addRefreshButton()
+	{
+
+		refresh = new JButton(new ImageIcon("includy/buttons/refresh.png"));
+		refresh.setBackground(Color.GRAY);
+		refresh.setName("refresh");
+		refresh.setBorderPainted(false);
+		refresh.addActionListener(this);
+		refresh.setPreferredSize(new Dimension(30,30));
+		add(refresh, gbc);
+	}
+	
+	void addListButton()
+	{
+
+		listButton = new JButton(new ImageIcon("includy/buttons/list.png"));
+		listButton.setBackground(Color.GRAY);
+		listButton.setName("list");
+		listButton.setBorderPainted(false);
+		listButton.addActionListener(this);
+		listButton.setPreferredSize(new Dimension(30,30));
+		add(listButton, gbc);
 	}
 	
 	

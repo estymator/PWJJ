@@ -41,10 +41,50 @@ public class CurrencyRates {
 			e.printStackTrace();
 		}
 		//Dodanie kursów pln 
-		
+		String btcRate= new String();
+		try {
+			btcRate=getBtcRate();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		currency_rates.put("BTC",Double.valueOf(btcRate));
 		currency_rates.put("PLN",1D);
-		currency_rates.put("BTC",10000D);
 
+	}
+	
+	String getBtcRate() throws ParseException, Exception
+	{
+		StringBuffer content = new StringBuffer();
+		URL url = new URL("https://api.bitbay.net/rest/trading/ticker/BTC-PLN");
+		
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		con.setConnectTimeout(2000);
+		con.setReadTimeout(2000);
+		BufferedReader in = new BufferedReader(
+				  new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				
+				while ((inputLine = in.readLine()) != null) {
+				    content.append(inputLine);
+				}
+				in.close();
+				con.disconnect();
+				String response=content.toString();
+				Object ResponseJson = new JSONParser().parse(response);
+				JSONObject ResponseJsonObject = (JSONObject) ResponseJson; //odpowiedz serwera konwertowana do tablicy json
+				
+				
+				JSONObject resJsonArray = (JSONObject) ResponseJsonObject.get("ticker");
+				
+				String BtcRate = (String) resJsonArray.get("rate");
+				
+				return BtcRate;
+				
 	}
 	
 	StringBuffer sendReq() throws IOException

@@ -1,9 +1,15 @@
 import java.io.*;
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Wallet {
 	HashMap<String, Double> wallet_amount = new HashMap<String, Double>();
+	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+	private Lock readLock = lock.readLock();
+	private Lock writeLock = lock.writeLock();
 	static String driver, url;
 	Connection con=null;
 	Statement st=null;
@@ -118,6 +124,32 @@ public class Wallet {
 	HashMap<String, Double> getWallet()
 	{
 		return wallet_amount;
+	}
+	
+	public Double getValue(String key)
+	{
+		Double result;
+		readLock.lock();
+		try {
+			result = wallet_amount.get(key);
+		}finally
+		{
+			readLock.unlock();
+		}
+		return result;
+		
+	}
+	
+	public void saveValue(String key, Double value)
+	{
+		writeLock.lock();
+		try {
+			Double result = wallet_amount.get(key);
+		}finally
+		{
+			writeLock.unlock();
+		}
+		
 	}
 
 

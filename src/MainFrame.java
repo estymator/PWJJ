@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.*;
 /**
  * Klasa generuj�ca okno g��wne	
@@ -19,11 +22,22 @@ public class MainFrame extends JFrame{
 	public MainFrame(Operator o)
 	{
 		super("Kalkulator Walutowy");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBackground(Color.GRAY);
 		
 		operator=o;
 		operator.mainFrame=this;
+		
+		addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent event)
+			{
+				operator.sendMaklers();
+				dispose();
+			    System.exit(0);
+			}
+		}
+		);
 		
 		
 		setLocation(0,0);
@@ -36,6 +50,10 @@ public class MainFrame extends JFrame{
 		
 		JPanel upperPanel = new UpperPanel(operator);
 		add(upperPanel,mainGbc);
+		mainGbc.gridy++;
+		
+		JPanel walletPanel = new WalletPanel(operator);
+		add(walletPanel,mainGbc);
 		mainGbc.gridy++;
 		
 		JPanel upperFlags = new FlagPanel(operator,"upper");
